@@ -144,9 +144,9 @@ if __name__ == '__main__':
     secondary_seed = random.randint(1, 2**32 - 1)
     random_number_gen = np.random.RandomState(seed=secondary_seed)
     parameters_imt = ParametersImtVale(imt_link='DOWNLINK')
-    parameters_imt.bs_physical_data_file = '../parameters/bs_data/brucutu-2Macros-1Small-omni.xls'
+    parameters_imt.bs_physical_data_file = '../../learning/input/phy_data_q_testing.xls'
     parameters_imt.bs_data = parameters_imt.read_input_cell_data_file(parameters_imt.bs_physical_data_file)
-    parameters_imt.ue_polygon_file = '../parameters/polygons/ContornoBrucutu.kml'
+    parameters_imt.ue_polygon_file = '../../learning/input/polygon_q_testing.kml'
     parameters_imt.ue_polygons = ParametersImtVale.read_input_ue_polygon_kml_file(parameters_imt.ue_polygon_file, '23K')
     parameters_imt.topography_data_file = '../parameters/maps/Brucutu_res_20m.asc'
     topography = Topography()
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     topology = TopologyInputMap(parameters_imt, topography)
     topology.calculate_coordinates()
     topology.map_polygons(parameters_imt.ue_polygons)
-    num_ues = [3]
+    num_ues = [10]
     topology.distribute_ues(num_ues, random_number_gen)
 
     fig = plt.figure(figsize=(8, 8), facecolor='w', edgecolor='k')  # create a figure object
@@ -167,7 +167,7 @@ if __name__ == '__main__':
     plt.title("Input map topology")
     plt.xlabel("x-coordinate [m]")
     plt.ylabel("y-coordinate [m]")
-    plt.legend(loc="upper left", scatterpoints=1)
+    plt.legend(bbox_to_anchor=(1.1, 1.05), scatterpoints=1)
     plt.tight_layout()
 
     axes = plt.gca()
