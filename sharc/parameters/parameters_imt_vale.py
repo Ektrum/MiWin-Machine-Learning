@@ -155,11 +155,11 @@ class ParametersImtVale(ParameterHandler):
                       "for simulation type 'IMT_VALE'.\n".format(self.__class__.__name__)
             sys.stderr.write(err_msg)
             sys.exit(1)
-
+        # TODO: disable FSPL here after FSPL predictor is implemented
         if self.channel_model == "INPUT_FILES":
             self.path_loss_files = self.get_path_loss_files(self.propagation_folder)
-        else:
+        elif not self.channel_model == "FSPL":
             err_msg = "PARAMETER ERROR[{}]: Parameter 'channel_model' must be set" \
-                      "to 'INPUT_FILES' for simulation type 'IMT_VALE'.\n".format(self.__class__.__name__)
+                      "to 'INPUT_FILES' or 'FSPL' for simulation type 'IMT_VALE'.\n".format(self.__class__.__name__)
             sys.stderr.write(err_msg)
             sys.exit(1)

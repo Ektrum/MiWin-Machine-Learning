@@ -129,9 +129,17 @@ class SimulationImtVale(ABC, Observable):
         Result is returned as a numpy array with dimensions num_a x num_b
         TODO: calculate coupling loss between active stations only
         """
+        # Path Loss for input files scenario
+        # TODO: create a FSPL predictor to use input files even for FSPL
+#        path_loss = propagation.get_loss(bs_id=self.bs.station_id,
+#                                         ue_position_x=self.ue.x,
+#                                         ue_position_y=self.ue.y)
+        # Path Loss for FSPL and input files
         path_loss = propagation.get_loss(bs_id=self.bs.station_id,
                                          ue_position_x=self.ue.x,
-                                         ue_position_y=self.ue.y)
+                                         ue_position_y=self.ue.y,
+                                         distance_3D = self.bs.get_distance_to(self.ue),
+                                         frequency = self.bs.center_freq)
 
         # define antenna gains
         gain_a = self.calculate_gains(station_a, station_b)
@@ -143,7 +151,7 @@ class SimulationImtVale(ABC, Observable):
         self.imt_ue_antenna_gain = gain_b
 
         # calculate coupling loss
-        coupling_loss = np.squeeze(path_loss - gain_a - gain_b)
+        coupling_loss = path_loss - gain_a - gain_b
 
         return coupling_loss
 
