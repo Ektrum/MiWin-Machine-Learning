@@ -148,7 +148,7 @@ if __name__ == '__main__':
     parameters_imt.bs_data = parameters_imt.read_input_cell_data_file(parameters_imt.bs_physical_data_file)
     parameters_imt.ue_polygon_file = '../../learning/input/polygon_q_testing.kml'
     parameters_imt.ue_polygons = ParametersImtVale.read_input_ue_polygon_kml_file(parameters_imt.ue_polygon_file, '23K')
-    parameters_imt.topography_data_file = '../parameters/maps/Brucutu_res_20m.asc'
+    parameters_imt.topography_data_file = '../../learning/input/topography_q_testing.asc'
     topography = Topography()
     topography.parse_raster_data(parameters_imt.topography_data_file)
 
