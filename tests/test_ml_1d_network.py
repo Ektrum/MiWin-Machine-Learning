@@ -22,7 +22,7 @@ class SimulationImtValeTest(unittest.TestCase):
     def setUp(self):
         self.our_path = os.path.dirname(__file__)
         self.param = Parameters()
-        self.param.set_file_name(os.path.join("..","learning","input","parameters_general_q_testing.ini"))
+        self.param.set_file_name(os.path.join("..","learning","input","parameters_general.ini"))
         self.param.read_params()
         
         self.random_number_gen = np.random.RandomState(seed=101)
